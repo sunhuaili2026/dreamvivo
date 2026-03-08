@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #252542 100%);
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8b5cf6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa;
+}
+
+/* 玻璃态效果 */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 渐变文字 */
+.gradient-text {
+  background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 按钮悬停效果 */
+.btn-primary {
+  @apply px-6 py-3 bg-gradient-to-r from-dream-600 to-dream-500 rounded-xl font-medium transition-all duration-300;
+}
+
+.btn-primary:hover {
+  @apply shadow-lg shadow-dream-500/30 transform -translate-y-0.5;
+}
+
+/* 输入框样式 */
+.input-dream {
+  @apply w-full px-4 py-3 bg-night-800 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-dream-500 transition-colors;
+}
+
+/* 卡片悬停 */
+.card-hover {
+  @apply transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply transform -translate-y-1 shadow-xl shadow-dream-500/10;
+}
