@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Mic, MicOff, Sparkles, Image, BookOpen, Video, Loader2 } from 'lucide-react'
 import { motion } from 'framer-motion'
-import axios from 'axios'
+import api from '../api.js'
 
 function NewDream() {
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ function NewDream() {
 
     setIsSubmitting(true)
     try {
-      const response = await axios.post('/api/dreams', formData)
+      const response = await api.post('/dreams', formData)
       navigate(`/dreams/${response.data._id}`)
     } catch (error) {
       console.error('提交失败:', error)

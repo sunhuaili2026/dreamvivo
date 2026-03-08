@@ -7,7 +7,7 @@ import {
 import { motion } from 'framer-motion'
 import { format } from 'date-fns'
 import { zhCN } from 'date-fns/locale'
-import axios from 'axios'
+import api from '../api.js'
 
 function DreamDetail() {
   const { id } = useParams()
@@ -29,7 +29,7 @@ function DreamDetail() {
   const fetchDream = async () => {
     try {
       setLoading(true)
-      const response = await axios.get(`/api/dreams/${id}`)
+      const response = await api.get(`/dreams/${id}`)
       setDream(response.data)
     } catch (error) {
       console.error('获取梦境失败:', error)
@@ -41,7 +41,7 @@ function DreamDetail() {
   const generateAnalysis = async () => {
     setGenerating(prev => ({ ...prev, analysis: true }))
     try {
-      const response = await axios.post(`/api/analysis/interpret/${id}`)
+      const response = await api.post(`/analysis/interpret/${id}`)
       setDream(prev => ({ ...prev, analysis: response.data }))
     } catch (error) {
       console.error('解梦失败:', error)
@@ -54,7 +54,7 @@ function DreamDetail() {
   const generateImage = async () => {
     setGenerating(prev => ({ ...prev, image: true }))
     try {
-      const response = await axios.post(`/api/generation/image/${id}`)
+      const response = await api.post(`/generation/image/${id}`)
       setDream(prev => ({ ...prev, generatedImage: response.data }))
     } catch (error) {
       console.error('图片生成失败:', error)
@@ -67,7 +67,7 @@ function DreamDetail() {
   const generateStory = async () => {
     setGenerating(prev => ({ ...prev, story: true }))
     try {
-      const response = await axios.post(`/api/analysis/continue/${id}`)
+      const response = await api.post(`/analysis/continue/${id}`)
       setDream(prev => ({ ...prev, generatedStory: response.data }))
     } catch (error) {
       console.error('续写失败:', error)
@@ -80,7 +80,7 @@ function DreamDetail() {
   const generateVideo = async () => {
     setGenerating(prev => ({ ...prev, video: true }))
     try {
-      const response = await axios.post(`/api/generation/video/${id}`)
+      const response = await api.post(`/generation/video/${id}`)
       alert('视频生成任务已创建，请稍后查看')
     } catch (error) {
       console.error('视频生成失败:', error)
@@ -93,7 +93,7 @@ function DreamDetail() {
   const deleteDream = async () => {
     if (!confirm('确定要删除这个梦境吗？')) return
     try {
-      await axios.delete(`/api/dreams/${id}`)
+      await api.delete(`/dreams/${id}`)
       navigate('/dreams')
     } catch (error) {
       console.error('删除失败:', error)

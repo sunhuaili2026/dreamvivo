@@ -1,0 +1,29 @@
+# 腾讯云 Serverless Framework 配置
+org: your-org
+app: dreamvivo
+stage: prod
+
+component: express
+name: dreamvivo-api
+
+inputs:
+  src:
+    src: ./
+    exclude:
+      - node_modules
+      - .env
+      - .env.example
+  region: ap-guangzhou
+  runtime: Nodejs18.15
+  memorySize: 512
+  timeout: 30
+  environment:
+    variables:
+      KIMI_API_KEY: ${env:KIMI_API_KEY}
+      MONGODB_URI: ${env:MONGODB_URI}
+      NODE_ENV: production
+  apigatewayConf:
+    protocols:
+      - http
+      - https
+    environment: release

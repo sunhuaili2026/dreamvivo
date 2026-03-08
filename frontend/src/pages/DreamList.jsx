@@ -4,7 +4,7 @@ import { Plus, Search, Calendar, Tag, Loader2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { format } from 'date-fns'
 import { zhCN } from 'date-fns/locale'
-import axios from 'axios'
+import api from '../api.js'
 
 function DreamList() {
   const [dreams, setDreams] = useState([])
@@ -25,7 +25,7 @@ function DreamList() {
       if (filterMood && filterMood !== '全部') {
         params.mood = filterMood
       }
-      const response = await axios.get('/api/dreams', { params })
+      const response = await api.get('/dreams', { params })
       setDreams(response.data.dreams)
     } catch (error) {
       console.error('获取梦境失败:', error)
